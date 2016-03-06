@@ -1,0 +1,17 @@
+#!/bin/sh
+echo “Is it morning? Please answer yes or no”
+read timeofday
+if [ $timeofday = “yes” ]
+then
+echo “Good morning”
+Notice that you use extra white space to indent the statements inside the if. This is
+just a convenience for the human reader; the shell ignores the additional white space.
+35
+Chapter 2: Shell Programming
+elif [ $timeofday = “no” ]; then
+echo “Good afternoon”
+else
+echo “Sorry, $timeofday not recognized. Enter yes or no”
+exit 1
+fi
+exit 0

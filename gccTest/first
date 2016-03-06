@@ -1,0 +1,11 @@
+#!/bin/sh
+
+for a in *
+ do
+ if
+ grep -l fred $a
+ then more $a
+ fi
+ done
+
+exit 0
