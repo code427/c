@@ -22,8 +22,8 @@ void freeClist (clink head, clink *memory);
 clink head=NULL;
 clink memory=NULL;
 
-//queue
-void queue();
+//stack
+void stackFunc();
 void initializeStack();
 void push();
 void pop();
@@ -249,7 +249,7 @@ char option[1];
 do{
 printf("0.Quit\n");
 printf("1.memory management, two lincked list loop\n");
-printf("2.Queue\n");
+printf("2.Stack\n");
 printf("\n");
 //reads one less than the number, here 2-1=1 
 fgets(option,2,stdin);
@@ -259,7 +259,7 @@ fgets(option,2,stdin);
 switch(atoi(option)){
 case 0:return;
 case 1:memoryLink();break;
-case 2:queue();break;
+case 2:stackFunc();break;
 }}
 while(atoi(option)!=0); 
 }
@@ -281,7 +281,7 @@ printClist(memory);
 }
 
 
-void queue()
+void stackFunc()
 {
 int choice;
 initializeStack();
