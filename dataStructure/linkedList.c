@@ -31,6 +31,14 @@ void peek();
 
 clink stack=NULL;
 
+//queue
+void queueFunc();
+void insert();
+void delete();
+void freeNextNode();
+
+clink queue=NULL;
+
 //allocate node to data list from memory list
 clink nodeAlloc(clink* memory){
 
@@ -62,7 +70,9 @@ void freeNode(clink *memory, clink* ptr){
 clink tmp=NULL;
 clink originStack=(*ptr);
 clink swap;
-
+int last=0;
+//test if *ptr is the last link
+if((*ptr)->next==(*ptr))last=1;
 /*printf("inside freeNode show stack\n"); 
 int j=1;
 if(stack!=NULL){
@@ -100,6 +110,7 @@ if(tmp!=NULL) swap->next=tmp;
 (*ptr)=tmp;
 //if((*ptr)!=NULL){printf("ptr is %d at %d",(*ptr)->data,(*ptr));fflush(stdout);sleep(1);}
 //if((*ptr)!=NULL){printf("stack is %d at %d",stack->data,stack);fflush(stdout);sleep(1);}
+if(last) *ptr=NULL;
 }
 
 void printClist(clink head){
@@ -236,6 +247,42 @@ ptr->data=100+i;
 freeNode(&memory,&ptr);
 }}
 
+void insert(){
+
+char input[512];
+printf("enter an numbe to insertr: ");
+fgets(input,sizeof(input),stdin);
+while(input[0]=='\n'){
+fgets(input,sizeof(input),stdin);}
+printf("get string %s",input);
+input[strlen(input)-1]='\0';
+
+if(memory==NULL)initializeMemory();
+
+clink new=nodeAlloc(&memory);
+
+new->data=atoi(input);
+if(queue==NULL){
+new->next=new;
+}
+else if(queue->next==queue){
+queue->next=new;
+new->next=queue;
+}
+else {
+new->next=queue->next;
+queue->next=new;
+}
+queue=new;
+}
+
+void delete(){
+freeNextNode();
+}
+
+void freeNextNode(){
+freeNode(&memory,&(queue->next));
+}
 
 void main(){
 //char *option X 
@@ -244,7 +291,9 @@ do{
 printf("0.Quit\n");
 printf("1.memory management, two lincked list loop\n");
 printf("2.Stack\n");
+printf("3.Queue\n");
 printf("\n");
+
 //reads one less than the number, here 2-1=1 
 fgets(option,2,stdin);
 while(option[0]=='\n'){
@@ -254,6 +303,7 @@ switch(atoi(option)){
 case 0:return;
 case 1:memoryLink();break;
 case 2:stackFunc();break;
+case 3:queueFunc();break;
 }}
 while(atoi(option)!=0); 
 }
@@ -275,29 +325,48 @@ printClist(memory);
 }
 
 
-void stackFunc()
-{
+void stackFunc() {
 int choice;
 initializeMemory();
         
         while(1)
         {
+         printf("0.return\n");
          printf("1.push\n");
          printf("2.pop\n");
          printf("3.peek\n");
          printf("4.display\n");
-         printf("5.quit\n");
          scanf("%d",&choice);   
 
          switch(choice)
                {
+                case 0: return;
                 case 1: push();break;
                 case 2: pop();break;
                 case 3: peek();break;
                 case 4: printClist(stack);break;
-                case 5: return;
                 }
         }
 
 
+}
+
+void queueFunc(){
+int choice;
+while(1)
+        {
+         printf("0.quit\n");
+         printf("1.insert\n");
+         printf("2.delete\n");
+         printf("3.display\n");
+         scanf("%d",&choice);
+
+         switch(choice)
+               {
+                case 0: return;
+                case 1: insert();break;
+                case 2: delete();break;
+                case 3: printClist(queue->next);break;//queue points to the end
+                }
+        }
 }
