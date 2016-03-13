@@ -19,19 +19,17 @@ void freeNode(clink *memory, clink* ptr);
 void printClist(clink head);
 clink createClist(int *array,clink *memory, int len);
 void freeClist (clink head, clink *memory);
+
 clink head=NULL;
 clink memory=NULL;
 
 //stack
 void stackFunc();
-void initializeStack();
 void push();
 void pop();
 void peek();
 
-int top=-1;
 clink stack=NULL;
-
 
 //allocate node to data list from memory list
 clink nodeAlloc(clink* memory){
@@ -161,10 +159,6 @@ if(head!=NULL){
 //clink temp=(*memory);do{printf("memory content after free Clist%d\n",temp->data);temp=temp->next;fflush(stdout);sleep(1);}while(1);
 }
 
-void initializeStack(){
-top=-1;
-}
-
 void push(){
 
 char input[512];
@@ -284,7 +278,6 @@ printClist(memory);
 void stackFunc()
 {
 int choice;
-initializeStack();
 initializeMemory();
         
         while(1)
