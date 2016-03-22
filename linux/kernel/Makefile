@@ -1,4 +1,3 @@
-
 obj-m += hello.o
 
 all:
